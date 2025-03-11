@@ -40,13 +40,13 @@ ui_print " ██╔══██║██║     ██╔═══╝ ";
 ui_print " ██║  ██║███████╗██║     ";
 ui_print " ╚═╝  ╚═╝╚══════╝╚═╝     ";
 ui_print " ";
-ui_print " Kernel by AlirezaParsi ";
+ui_print ".    Kernel by AlirezaParsi ";
 ui_print " ";
 ui_print " ";
 
 # Kernel naming scene
 ui_print " ";
-ui_print "Kernel Naming : "$ZIPFILE" ";
+ui_print "Kernel Name: "$ZIPFILE" ";
 ui_print " ";
 
 # Convert ZIPFILE to lowercase for case-insensitive comparison
