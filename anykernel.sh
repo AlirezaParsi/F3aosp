@@ -55,16 +55,14 @@ ZIPFILE_LOWER=$(echo "$ZIPFILE" | tr '[:upper:]' '[:lower:]')
 # Handle DTBO variants (MIUI or AOSP)
 case "$ZIPFILE_LOWER" in
   *miui*)
-    ui_print "MIUI Detected,";
-    ui_print "Using MIUI DTBO... ";
+    ui_print "MIUI/HyperOS Detected,";
+    ui_print "Using MIUI/HyperOS DTBO... ";
     mv miui-dtbo.img $home/dtbo.img;
-    rm -f aosp-dtbo.img;
   ;;
   *)
-    ui_print "AOSP Detected (default),";
+    ui_print "AOSP Detected (default) if you are using MIUI/HyperOS add -miui to your file name,";
     ui_print "Using AOSP DTBO... ";
-    mv aosp-dtbo.img $home/dtbo.img;
-    rm -f miui-dtbo.img;
+    # No need to move aosp-dtbo.img since dtbo.img is already present
   ;;
 esac
 ui_print " ";
@@ -72,16 +70,14 @@ ui_print " ";
 # Handle DTB variants (4500 mAh or 5000 mAh)
 case "$ZIPFILE_LOWER" in
   *bat*)
-    ui_print "4500 mAh Battery Detected,";
+    ui_print "bat variant,";
     ui_print "Using 4500 mAh DTB... ";
     mv *bat-dtb $home/dtb;
-    rm -f *5000-dtb;
   ;;
   *)
     ui_print "5000 mAh Battery Detected (default),";
     ui_print "Using 5000 mAh DTB... ";
-    mv *5000-dtb $home/dtb;
-    rm -f *bat-dtb;
+    # No need to move 5000-dtb since dtb is already present
   ;;
 esac
 
