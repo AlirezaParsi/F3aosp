@@ -74,14 +74,14 @@ case "$ZIPFILE_LOWER" in
   *bat*)
     ui_print "4500 mAh Battery Detected,";
     ui_print "Using 4500 mAh DTB... ";
-    mv *-bat-dtb $home/dtb;
-    rm -f *-5000-dtb;
+    mv *bat-dtb $home/dtb;
+    rm -f *5000-dtb;
   ;;
   *)
     ui_print "5000 mAh Battery Detected (default),";
     ui_print "Using 5000 mAh DTB... ";
-    mv *-5000-dtb $home/dtb;
-    rm -f *-bat-dtb;
+    mv *5000-dtb $home/dtb;
+    rm -f *bat-dtb;
   ;;
 esac
 
