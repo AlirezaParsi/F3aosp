@@ -30,20 +30,6 @@ ramdisk_compression=auto;
 # set permissions/ownership for included ramdisk files
 set_perm_recursive 0 0 750 750 $ramdisk/*;
 
-# Banner
-ui_print " ";
-ui_print " ";
-ui_print "  █████╗ ██╗     ██████╗ ";
-ui_print " ██╔══██╗██║     ██╔══██╗";
-ui_print " ███████║██║     ██████╔╝";
-ui_print " ██╔══██║██║     ██╔═══╝ ";
-ui_print " ██║  ██║███████╗██║     ";
-ui_print " ╚═╝  ╚═╝╚══════╝╚═╝     ";
-ui_print " ";
-ui_print ".    Kernel by AlirezaParsi ";
-ui_print " ";
-ui_print " ";
-
 # Kernel naming scene
 ui_print " ";
 ui_print "Kernel Name: "$ZIPFILE" ";
