@@ -32,38 +32,38 @@ set_perm_recursive 0 0 750 750 $ramdisk/*;
 
 # Kernel naming scene
 ui_print " ";
-ui_print "Kernel Name: "$ZIPFILE" ";
+ui_print "Kernel Name: $ZIPFILE ";
 ui_print " ";
 
 # Convert ZIPFILE to lowercase for case-insensitive comparison
 ZIPFILE_LOWER=$(echo "$ZIPFILE" | tr '[:upper:]' '[:lower:]')
 
-# Handle DTBO variants (MIUI or AOSP)
+# Handle DTBO variants (AOSP or MIUI)
 case "$ZIPFILE_LOWER" in
-  *miui*)
-    ui_print "MIUI/HyperOS Detected,";
-    ui_print "Using MIUI/HyperOS DTBO... ";
+  *-miui*)
+    ui_print "MIUI DTBO selected";
+    ui_print "Using MIUI DTBO... ";
     mv miui-dtbo.img $home/dtbo.img;
   ;;
   *)
-    ui_print "AOSP Detected (default) if you are using MIUI/HyperOS add -miui to your file name,";
+    ui_print "AOSP DTBO selected (default)";
     ui_print "Using AOSP DTBO... ";
-    # No need to move aosp-dtbo.img since dtbo.img is already present
+    mv dtbo.img $home/dtbo.img;
   ;;
 esac
 ui_print " ";
 
 # Handle DTB variants (4500 mAh or 5000 mAh)
 case "$ZIPFILE_LOWER" in
-  *bat*)
-    ui_print "bat variant,";
+  *-bat*)
+    ui_print "Battery variant detected";
     ui_print "Using 4500 mAh DTB... ";
-    mv *bat-dtb $home/dtb;
+    mv bat-dtb $home/dtb;
   ;;
   *)
-    ui_print "5000 mAh Battery Detected (default),";
+    ui_print "5000 mAh Battery Detected (default)";
     ui_print "Using 5000 mAh DTB... ";
-    # No need to move 5000-dtb since dtb is already present
+    # No need to move since dtb is already present
   ;;
 esac
 
@@ -71,7 +71,6 @@ esac
 dump_boot;
 
 # Begin Ramdisk Changes
-
 # migrate from /overlay to /overlay.d to enable SAR Magisk
 if [ -d $ramdisk/overlay ]; then
   rm -rf $ramdisk/overlay;
