@@ -39,7 +39,7 @@ case "$ZIPFILE" in
   *-ir-5k*)   v=ir-5k;;
   *-ir*)      v=ir;;
   *-5k*)      v=5k;;
-  *ALPKernel*) v=default;;
+  *ALPkernel*) v=default;;
 esac
 
 # If none are detected (adb sideload), let the user pick
