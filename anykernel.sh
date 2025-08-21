@@ -34,15 +34,13 @@ set_perm_recursive 0 0 750 750 $ramdisk/*;
 
 # Auto‑detect variant from zip name
 case "$ZIPFILE" in
-  *-miui-5k*) v=miui-5k;;
-  *-miui*)    v=miui;;
   *-5k*)      v=5k;;
   *ALPkernel*) v=default;;
 esac
 
 # If none are detected (adb sideload), let the user pick
 if [ -z "$v" ]; then
-  set -- miui miui-5k 5k default
+  set -- 5k default
   i=1; n=$#
   prev_option=""
   ui_print "Select DTBO variant:"
