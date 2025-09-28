@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Kernel by YourName
+kernel.string=ALP Kernel
 do.devicecheck=1
 do.modules=0
 do.systemless=1
