@@ -4,6 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
+kernel.string=Kernel by YourName
 do.devicecheck=1
 do.modules=0
 do.systemless=1
@@ -32,15 +33,36 @@ ramdisk_compression=auto;
 # set permissions/ownership for included ramdisk files
 set_perm_recursive 0 0 750 750 $ramdisk/*;
 
-# Auto‑detect variant from zip name
+# Auto-detect variant from zip name
 case "$ZIPFILE" in
   *-5k*)      v=5k;;
+  *miui*)     v=miui;;
+  *miui-5k*)  v=miui-5k;;
   *ALPkernel*) v=default;;
+esac
+
+# Automatic miui detection
+region="$(file_getprop /vendor/build.prop "ro.vendor.miui.build.region")"
+if [ -z "$region" ]; then
+  region="$(file_getprop /product/etc/build.prop "ro.miui.build.region")"
+fi
+case "$region" in
+  cn|in|ru|id|eu|tr|tw|gb|global|mx|jp|kr|lm|cl|mi)
+    # If ZIP contains -5k prefer miui-5k, otherwise choose miui
+    if echo "${ZIPFILE:-}" | grep -q -- '-5k'; then
+      v=miui-5k
+      os_string="MIUI ROM with 5K battery"
+    else
+      v=miui
+      os_string="MIUI ROM"
+    fi
+    ui_print "  -> $os_string is detected!"
+    ;;
 esac
 
 # If none are detected (adb sideload), let the user pick
 if [ -z "$v" ]; then
-  set -- 5k default
+  set -- 5k miui miui-5k default
   i=1; n=$#
   prev_option=""
   ui_print "Select DTBO variant:"
